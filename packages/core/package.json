@@ -17,7 +17,11 @@
   "devDependencies": {
     "@types/angularjs": "1.5.14-alpha",
     "@types/jasmine": "2.5.53",
+    "babel-loader": "7.1.4",
+    "babel-core": "6.26.3",
+    "eslint-loader": "2.0.0",
     "lodash": "^4.17.4",
-    "webpack": "3.10.0"
+    "webpack": "4.10.2",
+    "webpack-cli": "^2.1.4"
   }
 }

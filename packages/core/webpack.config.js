@@ -4,41 +4,54 @@ const path = require('path');
 const webpack = require('webpack');
 
 const config = {
-  entry: {
-    'ng-hot-reload-core': path.join(__dirname, 'src', 'index.js'),
-  },
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
-    library: 'ngHotReloadCore',
-    libraryTarget: 'umd',
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    modules: [
-      path.join(__dirname, 'src'),
-      'node_modules',
-    ],
-    extensions: ['.js'],
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      TESTING: false,
-    }),
-  ],
+    mode: 'development',
+    devtool: "source-map",
+    entry: {
+        'ng-hot-reload-core': path.join(__dirname, 'src', 'index.js'),
+    },
+    output: {
+        path: path.join(__dirname, 'dist'),
+        filename: '[name].js',
+        library: 'ngHotReloadCore',
+        // libraryTarget: 'umd',
+        libraryTarget: 'commonjs',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [['babel-preset-es2015',
+                            {exclude: /node_modules/}
+                        ]]
+                    }
+                }
+            },
+            // {
+            //     test: /\.js$/,
+            //     use: {
+            //         loader: 'eslint-loader',
+            //         options: {
+            //             exclude: /node_modules/
+            //         }
+            //     }
+            // },
+        ],
+    },
+    resolve: {
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules',
+        ],
+        extensions: ['.js'],
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            TESTING: false,
+        })
+    ]
 };
 
 module.exports = config;
