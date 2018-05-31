@@ -2,7 +2,7 @@
 (function(__ngHotReloadLoaderAngularGlobal) {
   var angular = module.hot ? (function() {
     var loader = require(<%= corePath %>);
-    return loader.decorateAngular({
+    return loader.ngHotReloadCore.decorateAngular({
       angular: __ngHotReloadLoaderAngularGlobal,
       forceRefresh: Boolean(<%= forceRefresh %>),
       preserveState: Boolean(<%= preserveState %>)

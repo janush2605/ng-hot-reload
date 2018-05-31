@@ -26,7 +26,7 @@ function transform(source, map) {
     source: source,
     requireAngular: typeof options.requireAngular === 'string' ?
       options.requireAngular
-      : '(require("angular"), angular)',
+      : '(require("angular"))',
     // Boolean options that default to true.
     forceRefresh: options.forceRefresh !== false,
     preserveState: options.preserveState !== false,
