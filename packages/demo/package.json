@@ -17,6 +17,7 @@
     "express": "^4.15.3"
   },
   "devDependencies": {
+    "babel-loader": "5.4.2",
     "browser-sync": "^2.18.12",
     "browser-sync-spa": "^1.0.3",
     "cheerio": "~1.0.0-rc.2",
