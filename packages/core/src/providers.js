@@ -1,6 +1,7 @@
 import angularProvider from './ng/angular';
 import privateKey from './util/make-private-key';
 import once from 'lodash/once';
+import angular from 'angular';
 
 const providerNames = [
   'service',
@@ -11,7 +12,7 @@ const providerNames = [
 ];
 
 function decorateProviders(() => {
-  const angular = angularProvider();
+  // const angular = angularProvider();
   providerNames.forEach(name => {
     const original = angular[name];
     angular[name] = ngHotReload$Provider;

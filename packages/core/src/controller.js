@@ -1,6 +1,7 @@
 import angularProvider from './ng/angular';
 import manualReload from './util/manual-reload';
 import updatesProvider from './updates';
+import angular from 'angular';
 
 const controllers = new Map();
 
@@ -8,7 +9,7 @@ function controllerProvider(moduleName) {
   let updates;
 
   function create(name, ctor) {
-    const angular = angularProvider();
+    // const angular = angularProvider();
     controllers.set(name, ctor);
 
     const deps = angular.injector().annotate(ctor);

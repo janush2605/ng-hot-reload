@@ -11,6 +11,8 @@ import {
   getTemplatePathPrefix,
   getTemplatePathSuffix,
 } from './template';
+import angular from 'angular';
+
 
 const modules = new Map();
 const factoryCache = new Map();
@@ -67,7 +69,7 @@ function decorateAngular(options) {
     setOptions(options);
     initLazyVars(options.angular);
   }
-  const angular = angularProvider();
+  // const angular = angularProvider();
   const angularMock = {
     // Flag that signals to loaders that the mocked angular
     // was indeed used to create something.

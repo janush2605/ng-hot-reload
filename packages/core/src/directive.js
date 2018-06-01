@@ -9,6 +9,7 @@ import getDependencies      from './util/directive-dependencies';
 import controllerDefinition from './util/controller-definition';
 import makePrivateKey       from './util/make-private-key';
 import manualReload from './util/manual-reload';
+import angular from 'angular'
 
 const
   $originalCompile = makePrivateKey('ng-hot-reload/directive/compile'),
@@ -26,9 +27,7 @@ function hasIsolateScope({ scope }) {
  *        and updating directives.
  */
 const directiveProvider = moduleName => {
-  const
-    angular = angularProvider(),
-    { isFunction } = angular;
+  const { isFunction } = angular;
   // Initialized later
   let $injector, updates;
 

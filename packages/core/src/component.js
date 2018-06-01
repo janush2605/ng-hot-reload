@@ -1,10 +1,10 @@
 import angularProvider from './ng/angular';
 import privateKey from './ng/private-key';
 import controllerDefinition from './util/controller-definition.js';
+import angular from 'angular';
 
 function componentProvider(moduleName) {
-  const angular = angularProvider(),
-    { isFunction, isArray, forEach } = angular;
+  const { isFunction, isArray, forEach } = angular;
 
   /**
      * Calls `this.directive` with "normalized" definition object.
