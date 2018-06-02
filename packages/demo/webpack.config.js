@@ -3,20 +3,18 @@ var webpack = require('webpack'),
     path = require('path');
 
 module.exports = {
-    mode: 'development',
     devtool: "source-map",
     entry: [
         'webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
-        './webpack-example/index.js',
-        './node_modules/angular/angular.js',
-        './node_modules/angular/index.js'
+        './webpack-example/index.js'
     ],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
         publicPath: '/',
     },
+    mode: 'development',
     module: {
         rules: [
             {
@@ -26,7 +24,7 @@ module.exports = {
                         loader: 'ng-hot-reload-loader',
                         options: {
                             exclude: /node_modules/,
-                            requireAngular: 'require("angular/angular.js")'
+                            requireAngular: 'require("angular")'
                         }
                     },
                     {

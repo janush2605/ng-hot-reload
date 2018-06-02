@@ -1,24 +1,21 @@
-import angularProvider from './ng/angular';
-import privateKey from './util/make-private-key';
-import once from 'lodash/once';
-import angular from 'angular';
-
 const providerNames = [
-  'service',
-  'factory',
-  'constant',
-  'value',
-  'filter',
+    'service',
+    'factory',
+    'constant',
+    'value',
+    'filter',
 ];
 
-function decorateProviders(() => {
-  // const angular = angularProvider();
-  providerNames.forEach(name => {
-    const original = angular[name];
-    angular[name] = ngHotReload$Provider;
+function decorateProviders(angular) {
 
-    function ngHotReload$Provider() {
-      return original.apply(this, arguments);
-    };
-  });
-});
+    providerNames.forEach(name => {
+        const original = angular[name];
+        angular[name] = ngHotReload$Provider;
+
+        function ngHotReload$Provider() {
+            return original.apply(this, arguments);
+        };
+    });
+};
+
+export default decorateProviders;

@@ -1,7 +1,6 @@
 import angularProvider from './ng/angular';
 import updates from './updates';
 import manualReload from './util/manual-reload';
-import angular from 'angular';
 
 let
     templatePathPrefix =
@@ -32,7 +31,7 @@ function decorateTemplateRequest(moduleName = 'ng') {
 
     // Initialized when the app first runs
     let templateUpdates, $templateCache;
-    // const angular = angularProvider();
+    const angular = angularProvider();
 
     // Override the $templateCache service so we can react to template changes
     angular.module(moduleName).config(['$provide', function ($provide) {

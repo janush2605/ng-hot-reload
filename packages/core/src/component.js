@@ -1,12 +1,12 @@
 import angularProvider from './ng/angular';
 import privateKey from './ng/private-key';
 import controllerDefinition from './util/controller-definition.js';
-import angular from 'angular';
 
 function componentProvider(moduleName) {
-  const { isFunction, isArray, forEach } = angular;
+    const angular = angularProvider();
+    const {isFunction, isArray, forEach} = angular;
 
-  /**
+    /**
      * Calls `this.directive` with "normalized" definition object.
      *
      * NOTE: This is almost an exact copy angular's own component function:
@@ -17,55 +17,56 @@ function componentProvider(moduleName) {
      * @param {Object} options Component definition object
      * @return {*} Whatever this.directive returns.
      */
-  function registerComponent(name, options) {
-    return this.directive(name, [
-      '$injector',
-      function($injector) {
-        const def = {
-          controller: options.controller || function() {},
-          controllerAs: identifierForController(options) || '$ctrl',
-          template: makeInjectable(
-            options.template || options.templateUrl ? options.template : ''),
-          templateUrl: makeInjectable(options.templateUrl),
-          transclude: options.transclude,
-          scope: {},
-          bindToController: options.bindings || {},
-          restrict: 'E',
-          require: options.require,
-        };
+    function registerComponent(name, options) {
+        return this.directive(name, [
+            '$injector',
+            function ($injector) {
+                const def = {
+                    controller: options.controller || function () {
+                    },
+                    controllerAs: identifierForController(options) || '$ctrl',
+                    template: makeInjectable(
+                        options.template || options.templateUrl ? options.template : ''),
+                    templateUrl: makeInjectable(options.templateUrl),
+                    transclude: options.transclude,
+                    scope: {},
+                    bindToController: options.bindings || {},
+                    restrict: 'E',
+                    require: options.require,
+                };
 
-        forEach(options, (val, key) => {
-          if (privateKey(key)) {
-            def[key] = val;
-          }
-        });
+                forEach(options, (val, key) => {
+                    if (privateKey(key)) {
+                        def[key] = val;
+                    }
+                });
 
-        function identifierForController(config) {
-          return controllerDefinition(config).controllerAs;
-        }
+                function identifierForController(config) {
+                    return controllerDefinition(config).controllerAs;
+                }
 
-        function makeInjectable(fn) {
-          if (isFunction(fn) || isArray(fn)) {
-            return function($element, $attrs) {
-              return $injector.invoke(fn, this, {
-                $element,
-                $attrs,
-              });
-            };
-          } else {
-            return fn;
-          }
-        }
+                function makeInjectable(fn) {
+                    if (isFunction(fn) || isArray(fn)) {
+                        return function ($element, $attrs) {
+                            return $injector.invoke(fn, this, {
+                                $element,
+                                $attrs,
+                            });
+                        };
+                    } else {
+                        return fn;
+                    }
+                }
 
-        return def;
-      },
-    ]);
-  }
+                return def;
+            },
+        ]);
+    }
 
-  return {
-    create: registerComponent,
-    update: registerComponent,
-  };
+    return {
+        create: registerComponent,
+        update: registerComponent,
+    };
 }
 
 export default componentProvider;
