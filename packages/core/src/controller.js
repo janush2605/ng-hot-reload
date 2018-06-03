@@ -14,6 +14,7 @@ function controllerProvider(moduleName) {
         const deps = angular.injector().annotate(ctor);
         // @ts-ignore
         ngHotReload$Controller.$inject = [
+            '$injector',
             '$controller',
             '$rootScope',
         ].concat(deps);
@@ -21,7 +22,7 @@ function controllerProvider(moduleName) {
         // @ts-ignore
         return angular.module(moduleName).controller(name, ngHotReload$Controller);
 
-        function ngHotReload$Controller($controller, $rootScope, ...rest) {
+        function ngHotReload$Controller($injector, $controller, $rootScope, ...rest) {
             updates = updatesProvider($rootScope, moduleName, 'controller');
             const ctor = controllers.get(name);
             if (!angular.equals(deps, angular.injector().annotate(ctor))) {

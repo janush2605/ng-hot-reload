@@ -7,6 +7,8 @@ import manualReload from './util/manual-reload';
 import {setOptions} from './options';
 import {updateId} from './updates';
 import {decorateTemplateRequest, getTemplatePathPrefix, getTemplatePathSuffix,} from './template';
+import {decorateProviders} from "./providers";
+import serviceProvider from "./service";
 
 
 const modules = new Map();
@@ -55,8 +57,6 @@ const initLazyVars = once(angular => {
  * instead update the previously created directive.
  *
  * @param {Object} options Options for the loader.
- * @param {Angular} options.angular Unmodified version of angular, only
- *      required in the first run.
  * @return {*} Modified version of angular.
  */
 function decorateAngular(options) {
@@ -78,6 +78,7 @@ function decorateAngular(options) {
                     directive: directiveProvider(name),
                     component: componentProvider(name),
                     controller: controllerProvider(name),
+                    // service: serviceProvider(name),
                     initialized: undefined,
                 });
             }
@@ -119,6 +120,7 @@ function decorateAngular(options) {
                     directive: decorate('directive'),
                     component: decorate('component'),
                     controller: decorate('controller'),
+                    // service: decorate('service')
                 }
             );
             return moduleMock;

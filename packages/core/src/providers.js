@@ -1,3 +1,5 @@
+import angularProvider from './ng/angular';
+
 const providerNames = [
     'service',
     'factory',
@@ -6,8 +8,8 @@ const providerNames = [
     'filter',
 ];
 
-function decorateProviders(angular) {
-
+export function decorateProviders() {
+    const angular = angularProvider();
     providerNames.forEach(name => {
         const original = angular[name];
         angular[name] = ngHotReload$Provider;
@@ -17,5 +19,3 @@ function decorateProviders(angular) {
         };
     });
 };
-
-export default decorateProviders;

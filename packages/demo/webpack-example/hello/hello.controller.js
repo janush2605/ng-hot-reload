@@ -1,8 +1,12 @@
 import './hello.service';
 
 angular.module('hot-reload-demo')
-  .controller('HelloController', ['helloService', 'helloFactory', function(helloService, helloFactory) {
-    this.name = 'passat2331';
-    this.message = 'Hello 123 ';
+  .controller('HelloController', ['$scope', 'helloService', function($scope, helloService) {
+    this.name = 'passat';
+    this.message = 'Hello';
     this.haha = helloService.mul();
+
+    $scope.click = () => {
+        alert(helloService.mul());
+    }
   }]);
