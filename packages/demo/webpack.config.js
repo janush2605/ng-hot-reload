@@ -55,6 +55,6 @@ module.exports = {
         hot: true,
         port: 8080,
         historyApiFallback: true,
-        contentBase: path.join(__dirname, "dist")
+        contentBase: path.join(__dirname, "webpack-example/dist")
     },
 };
